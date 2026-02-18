@@ -2,7 +2,7 @@ name: Build and Deploy
 
 on:
   push:
-    branches: [main]
+    branches: [main, gh-pages]
   pull_request:
     branches: [main]
   workflow_dispatch:
@@ -30,14 +30,9 @@ jobs:
       - name: Build project
         run: npm run build
 
-      - name: Run tests (if configured)
-        run: npm test || true
-
       - name: Deploy to GitHub Pages
-        if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/gh-pages'
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
-          # Also commit dist to root for GitHub Pages
-          separate_publish_dir: 'true'
+          publish_dir: ./
