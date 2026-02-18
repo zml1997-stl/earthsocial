@@ -10,6 +10,13 @@ export default defineConfig({
   },
   build: {
     outDir: 'dist',
-    sourcemap: false
+    sourcemap: false,
+    rollupOptions: {
+      output: {
+        entryFileNames: 'assets/index-[hash].js',
+        chunkFileNames: 'assets/index-[hash].js',
+        assetFileNames: 'assets/index-[hash].[ext]'
+      }
+    }
   }
 })
