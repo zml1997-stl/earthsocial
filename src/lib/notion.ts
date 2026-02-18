@@ -31,9 +31,7 @@ import type {
 } from '../types/notion';
 
 // Environment variable for API key
-const NOTION_API_KEY = typeof import.meta !== 'undefined' 
-  ? (import.meta as unknown as Record<string, string>).VITE_NOTION_API_KEY || (import.meta as unknown as Record<string, string>).NOTION_API_KEY
-  : process.env.NOTION_API_KEY;
+const NOTION_API_KEY = import.meta.env.VITE_NOTION_API_KEY || import.meta.env.NOTION_API_KEY || '';
 
 // Default Notion API base URL (for direct usage)
 const NOTION_API_BASE = 'https://api.notion.com/v1';
